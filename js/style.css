@@ -1,0 +1,35 @@
+body 
+{ 
+  font-family: helvetica, sans-serif;
+  font-size: 12px;
+}
+
+h1 { 
+  letter-spacing: -1px;
+  font-size:25px;
+}
+
+h2 { 
+  font-size: 20px;
+  letter-spacing: -1px;
+  color: #034769;
+  border-bottom: 1px solid #034769;
+}
+table { 
+/*  font-family: sans-serif; */
+  text-align: center;
+  font-size: 1.2em;
+  margin: 15px auto;
+  border: 1px solid black;
+} 
+table th { 
+  color: white;
+  background-color: #034769;
+  padding: 2px 5px;
+}
+table td { 
+  padding: 2px 5px;
+}
+
+
+
