@@ -176,7 +176,10 @@ class MonitorSSHLocation:
             if not self.config.is_local:
                 submission_attr = file_manager.listdir_attr(project_dir)
             else:
-                submission_filenames = file_manager.listdir(project_dir)
+                #submission_filenames = file_manager.listdir(project_dir)
+                mtime = lambda f: file_manager.stat(project_dir+"/"+f).st_mtime
+                submission_filenames = sorted(file_manager.listdir(project_dir),
+                        key=mtime) # Sort to choose oldest submission first
                 for filename in submission_filenames:
                     stat = paramiko.SFTPAttributes.from_stat(file_manager.stat(
                             project_dir + "/" + filename))
@@ -283,7 +286,8 @@ class MonitorSSHLocation:
         index_fp.write(header_html + title_html + PROJECT_TABLE_HTML)
         index_fp.write("<h2>Project Overviews</h2>")
         for project in self.config.projects:
-            data = self.project_data[project.name].values()
+            data = sorted(self.project_data[project.name].values(),
+                    key=lambda x: x['name']) # Sort by name
             num_queued = len(
                 [a for a in data if a['status'] == 'queued'])
             num_completed = len(
